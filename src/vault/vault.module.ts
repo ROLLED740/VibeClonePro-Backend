@@ -9,4 +9,4 @@ import { Vault } from './vault.entity';
   controllers: [VaultController],
   providers: [VaultService],
 })
-export class VaultModule { }
+export class VaultModule {}

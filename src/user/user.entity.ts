@@ -1,22 +1,43 @@
-import { Entity, Column, PrimaryGeneratedColumn, CreateDateColumn, UpdateDateColumn } from 'typeorm';
+import {
+  Entity,
+  Column,
+  PrimaryGeneratedColumn,
+  CreateDateColumn,
+  UpdateDateColumn,
+} from 'typeorm';
 
 @Entity()
 export class User {
-    @PrimaryGeneratedColumn('uuid')
-    id: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
-    @Column({ unique: true })
-    email: string;
+  @Column({ unique: true })
+  email: string;
 
-    @Column()
-    password?: string; // Optional if using OAuth, but required for local auth
+  @Column()
+  password?: string; // Optional if using OAuth, but required for local auth
 
-    @Column({ default: false })
-    isLifetimeMember: boolean;
+  @Column({ default: false })
+  isLifetimeMember: boolean;
 
-    @CreateDateColumn()
-    createdAt: Date;
+  @Column({ nullable: true })
+  stripeCustomerId: string;
 
-    @UpdateDateColumn()
-    updatedAt: Date;
+  @Column({ nullable: true })
+  subscriptionStatus: string;
+
+  @Column({ nullable: true, type: 'text' })
+  openaiKey: string;
+
+  @Column({ nullable: true, type: 'text' })
+  googleKey: string;
+
+  @Column({ nullable: true, type: 'text' })
+  anthropicKey: string;
+
+  @CreateDateColumn()
+  createdAt: Date;
+
+  @UpdateDateColumn()
+  updatedAt: Date;
 }

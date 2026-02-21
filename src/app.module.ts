@@ -8,7 +8,12 @@ import { VaultModule } from './vault/vault.module';
 import { TelemetryModule } from './telemetry/telemetry.module';
 import { User } from './user/user.entity';
 import { Vault } from './vault/vault.entity';
-// import { Telemetry } from './telemetry/telemetry.entity'; // Will add later
+import { UserUsage } from './usage/usage.entity';
+import { UsageModule } from './usage/usage.module';
+
+import { StripeModule } from './stripe/stripe.module';
+import { VibeEngineModule } from './vibe-engine/vibe-engine.module';
+import { StitchModule } from './stitch/stitch.module';
 
 @Module({
   imports: [
@@ -24,16 +29,26 @@ import { Vault } from './vault/vault.entity';
         username: configService.get<string>('DB_USERNAME'),
         password: configService.get<string>('DB_PASSWORD'),
         database: configService.get<string>('DB_NAME'),
-        entities: [User, Vault], // Add entities here
+        entities: [User, Vault, UserUsage], // Add entities here
         synchronize: true, // Auto-create tables (dev only)
+        ssl: true,
+        extra: {
+          ssl: {
+            rejectUnauthorized: false,
+          },
+        },
       }),
       inject: [ConfigService],
     }),
     UserModule,
     VaultModule,
     TelemetryModule,
+    StripeModule,
+    VibeEngineModule,
+    StitchModule,
+    UsageModule,
   ],
   controllers: [AppController],
   providers: [AppService],
 })
-export class AppModule { }
+export class AppModule {}

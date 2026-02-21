@@ -4,6 +4,6 @@ import { TelemetryService } from './telemetry.service';
 
 @Module({
   providers: [TelemetryGateway, TelemetryService],
-  exports: [TelemetryService],
+  exports: [TelemetryService, TelemetryGateway],
 })
-export class TelemetryModule { }
+export class TelemetryModule {}

@@ -13,13 +13,17 @@ import { Server, Socket } from 'socket.io';
     origin: '*', // Allow all origins for dev
   },
 })
-export class TelemetryGateway implements OnGatewayConnection, OnGatewayDisconnect {
+export class TelemetryGateway
+  implements OnGatewayConnection, OnGatewayDisconnect
+{
   @WebSocketServer()
   server: Server;
 
-  handleConnection(client: Socket, ...args: any[]) {
+  handleConnection(client: Socket) {
     console.log(`Client connected: ${client.id}`);
-    this.server.emit('status', { message: 'Connected to VibeClonePro Telemetry' });
+    this.server.emit('status', {
+      message: 'Connected to VibeClonePro Telemetry',
+    });
   }
 
   handleDisconnect(client: Socket) {
